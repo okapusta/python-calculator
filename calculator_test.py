@@ -1,4 +1,5 @@
 from calculator import Calculator
+import pytest
 
 def test_sum():
   calculator = Calculator(3, 5)
@@ -15,3 +16,13 @@ def test_multiply():
 def test_divide():
   calculator = Calculator(3, 5)
   assert calculator.divide() == 3/5
+
+
+@pytest.mark.parametrize("a, b, expected", [
+      (2, 3, 5),
+      (-1, -2, -3),
+      (2.5, 3.5, 6.0),
+  ])
+def test_add_parametrized(a, b, expected):
+    calc = Calculator(a, b)
+    assert calc.sum() == expected
