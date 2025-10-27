@@ -25,7 +25,7 @@ calculator.sum()
 
 API Example:
 ```
-curl http://127.0.0.1:5000/calculate\?op\=multiply\&arg1\=2\&arg2\=5
+curl -X POST http://127.0.0.1:5000/calculate\?op\=multiply\&arg1\=2\&arg2\=5
 
 
 {
