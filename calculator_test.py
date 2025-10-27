@@ -1,4 +1,4 @@
-from calculator import Calculator
+from calculator import Calculator, InvalidArgumentException
 import pytest
 
 def test_sum():
@@ -16,6 +16,16 @@ def test_multiply():
 def test_divide():
   calculator = Calculator(3, 5)
   assert calculator.divide() == 3/5
+
+def test_division_by_zero():
+  calculator = Calculator(3, 0)
+  assert calculator.divide() == 0
+
+def test_any_argument_string():
+  with pytest.raises(InvalidArgumentException) as error:
+    calculator = Calculator(3, "tester")
+    calculator.sum() == 0
+  assert str(error.value) == "invalid arguments"
 
 
 @pytest.mark.parametrize("a, b, expected", [
