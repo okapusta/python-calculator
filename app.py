@@ -26,7 +26,7 @@ def create_app():
         """"
         Calculator API
         """
-        print(request.args)
+
         op   = request.args.get('op', type=str)
         arg1 = request.args.get('arg1', type=int)
         arg2 = request.args.get('arg2', type=int)
