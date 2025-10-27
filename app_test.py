@@ -28,10 +28,6 @@ def runner(app):
 
 
 def test_valid_request(client):
-    import json
-
-
-def test_add_user(client):
     response = client.post(
         "/calculate", query_string={ "op": "sum", "arg1": 1, "arg2": 2 }
     )
