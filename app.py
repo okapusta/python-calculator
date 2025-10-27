@@ -6,6 +6,11 @@ from flask import Flask, jsonify, request
 from calculator import Calculator
 
 def create_app():
+    """"
+    Creates flask app
+    """
+
+    # pylint: disable=redefined-outer-name
     app = Flask(__name__)
 
     @app.route("/", methods=["GET"])

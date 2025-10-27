@@ -1,15 +1,13 @@
-from numbers import Number
-
 """"
 This is the calculator module
 """
+
+from numbers import Number
 
 class InvalidArgumentException(ValueError):
     """
     Raised when either of arguments is invalid
     """
-
-    pass
 class Calculator:
     """
     Calculator class
@@ -49,4 +47,3 @@ class Calculator:
     def __validate_arguments(self):
         if not isinstance(self.op1, Number) or not isinstance(self.op2, Number):
             raise InvalidArgumentException("invalid arguments")
-
