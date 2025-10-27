@@ -7,7 +7,7 @@ Simple calculator
 
 Running:
 ```
-uv run python main.py
+uv run python app.py
 ```
 
 Testing:
