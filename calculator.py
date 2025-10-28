@@ -8,10 +8,28 @@ class InvalidArgumentException(ValueError):
     """
     Raised when either of arguments is invalid
     """
+class InvalidOperationException(ValueError):
+    """
+    Raised when operations is invalid
+    """
 class Calculator:
     """
     Calculator class
     """
+    @classmethod
+    def calculate(cls, operation, arg1, arg2):
+        calculator = cls(arg1, arg2)
+        if operation == 'sum':
+            return calculator.sum()
+        if operation == 'subtract':
+            return calculator.subtract()
+        if operation == 'multiply':
+            return calculator.multiply()
+        if operation == 'divide':
+            return calculator.divide()
+
+        raise InvalidOperationException(f"Invalid operation {operation}")
+
     def __init__(self, op1: float, op2: float):
         self.op1 = op1
         self.op2 = op2
