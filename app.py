@@ -3,7 +3,7 @@ This is a calculator webservice
 """
 
 from flask import Flask, jsonify, request
-from calculator import Calculator
+from calculator import Calculator, InvalidOperationException
 
 def create_app():
     """"
@@ -36,23 +36,12 @@ def create_app():
         if not arg1 or not arg2:
             return jsonify({ "error": "missing numbers" }), 400
 
-        result = __run_calculations(op, arg1, arg2)
+        try:
+            result = Calculator.calculate(op, arg1, arg2)
 
-        return jsonify({ "result": result })
-
-    def __run_calculations(operation, arg1, arg2):
-        calculator = Calculator(arg1, arg2)
-
-        if operation == 'sum':
-            return calculator.sum()
-        if operation == 'subtract':
-            return calculator.subtract()
-        if operation == 'multiply':
-            return calculator.multiply()
-        if operation == 'divide':
-            return calculator.divide()
-
-        return None
+            return jsonify({ "result": result })
+        except InvalidOperationException:
+            return jsonify({ "error": "invalid operation" }), 400
 
     return app
 

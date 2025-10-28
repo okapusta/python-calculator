@@ -48,9 +48,9 @@ def test_invalid_operation(client):
     response = client.post(
         "/calculate", query_string={ "op": "invalid", "arg1": 1, "arg2": 2 }
     )
-    assert response.status_code == 200
+    assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { 'result': None }
+    assert response_json == { "error": "invalid operation" }
 
 def test_invalid_arguments(client):
     response = client.post(
@@ -58,7 +58,7 @@ def test_invalid_arguments(client):
     )
     assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { 'error': 'missing numbers' }
+    assert response_json == { "error": "missing numbers" }
 
 
 def test_division_by_zero_request(client):
@@ -67,4 +67,4 @@ def test_division_by_zero_request(client):
     )
     assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { 'error': 'missing numbers' }
+    assert response_json == { "error": "missing numbers" }
