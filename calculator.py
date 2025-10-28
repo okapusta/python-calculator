@@ -18,6 +18,11 @@ class Calculator:
     """
     @classmethod
     def calculate(cls, operation, arg1, arg2):
+        """
+        Constructs calculator and runs appropriate operation
+
+        Raises InvalidOperationException
+        """
         calculator = cls(arg1, arg2)
         if operation == 'sum':
             return calculator.sum()
