@@ -23,8 +23,7 @@ def test_division_by_zero():
 
 def test_any_argument_string():
   with pytest.raises(InvalidArgumentException) as error:
-    calculator = Calculator(3, "tester")
-    calculator.sum() == 0
+    Calculator(3, "tester")
   assert str(error.value) == "invalid arguments"
 
 
