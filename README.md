@@ -5,25 +5,31 @@ Simple calculator
 -----
 
 
-Running:
+## Running:
+
+Install deps
+```
+uv sync
+```
+Run
 ```
 uv run python app.py
 ```
 
-Testing:
+## Testing:
 
 ```
 uv run pytest
 ```
 
-Calculator Example:
+## Calculator Example:
 
 ```python
 calculator = Calculator(3, 5)
 calculator.sum()
 ```
 
-API Example:
+## API Example:
 ```
 curl -X POST http://127.0.0.1:5000/calculate\?op\=multiply\&arg1\=2\&arg2\=5
 
