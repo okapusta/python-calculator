@@ -35,3 +35,13 @@ def test_any_argument_string():
 def test_add_parametrized(a, b, expected):
     calc = Calculator(a, b)
     assert calc.sum() == expected
+
+@pytest.mark.parametrize("m, a, b, expected", [
+      ('sum', 2, 3, 5),
+      ('subtract', -1, -2, 1),
+      ('multiply', 4, 4, 16.0),
+      ('divide', 6, 2, 3.0),
+  ])
+def test_class_calculate(m, a, b, expected):
+    result = getattr(Calculator, 'calculate')(m, a, b)
+    assert result == expected

@@ -10,7 +10,6 @@ def create_app():
     Creates flask app
     """
 
-    # pylint: disable=redefined-outer-name
     app = Flask(__name__)
 
     @app.route("/", methods=["GET"])
@@ -46,5 +45,5 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)
+    calculator_app = create_app()
+    calculator_app.run(debug=True)
