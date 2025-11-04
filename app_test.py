@@ -42,7 +42,7 @@ def test_missing_operation(client):
     )
     assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { 'error': 'missing operation' }
+    assert response_json == {'error': {'op': ['Missing data for required field.'] }}
 
 def test_invalid_operation(client):
     response = client.post(
@@ -50,7 +50,7 @@ def test_invalid_operation(client):
     )
     assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { "error": "invalid operation" }
+    assert response_json == {'error': {'op': ['Must be one of: sum, subtract, multiply, divide.'] }}
 
 def test_invalid_arguments(client):
     response = client.post(
@@ -58,7 +58,7 @@ def test_invalid_arguments(client):
     )
     assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { "error": "missing numbers" }
+    assert response_json == { "error": {'arg1': ['Not a valid integer.'] }}
 
 
 def test_division_by_zero_request(client):
@@ -67,4 +67,12 @@ def test_division_by_zero_request(client):
     )
     assert response.status_code == 400
     response_json = json.loads(response.data)
-    assert response_json == { "error": "missing numbers" }
+    assert response_json == { "error": { 'arg2': ['cannot divide by zero'] }}
+
+def test_non_division_2nd_arg(client):
+    response = client.post(
+        "/calculate", query_string={ "op": "sum", "arg1": 1, "arg2": 0 }
+    )
+    assert response.status_code == 200
+    response_json = json.loads(response.data)
+    assert response_json == { "result": 1 }
