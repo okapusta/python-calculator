@@ -3,9 +3,10 @@ This is a calculator webservice
 """
 
 from flask import Flask, jsonify, request
-from calculator import Calculator, InvalidOperationException
-from schemas import CalculationSchema
 from marshmallow import ValidationError
+
+from calculator import Calculator
+from schemas import CalculationSchema
 
 def create_app():
     """"
