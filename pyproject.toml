@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "coverage>=7.11.0",
     "flask>=3.1.2",
+    "marshmallow>=4.1.0",
     "pylint>=4.0.2",
     "pytest>=8.4.2",
 ]

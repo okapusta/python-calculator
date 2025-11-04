@@ -3,7 +3,10 @@ This is a calculator webservice
 """
 
 from flask import Flask, jsonify, request
-from calculator import Calculator, InvalidOperationException
+from marshmallow import ValidationError
+
+from calculator import Calculator
+from schemas import CalculationSchema
 
 def create_app():
     """"
@@ -26,21 +29,12 @@ def create_app():
         Calculator API
         """
 
-        op   = request.args.get('op', type=str)
-        arg1 = request.args.get('arg1', type=int)
-        arg2 = request.args.get('arg2', type=int)
-
-        if not op:
-            return jsonify({ "error": "missing operation" }), 400
-        if not arg1 or not arg2:
-            return jsonify({ "error": "missing numbers" }), 400
-
         try:
-            result = Calculator.calculate(op, arg1, arg2)
-
+            parsed = CalculationSchema().load(request.args)
+            result = Calculator.calculate(parsed['op'], parsed['arg1'], parsed['arg2'])
             return jsonify({ "result": result })
-        except InvalidOperationException:
-            return jsonify({ "error": "invalid operation" }), 400
+        except ValidationError as err:
+            return jsonify({ "error": err.messages }), 400
 
     return app
 
