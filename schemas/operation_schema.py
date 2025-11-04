@@ -1,5 +1,4 @@
 from marshmallow import Schema, ValidationError, fields, validate, validates_schema
-from enum import Enum
 
 
 class CalculationSchema(Schema):
